@@ -1,0 +1,29 @@
+/* Hide scrollbar but allow scrolling */
+.scroll-container {
+    display: flex;
+    overflow-x: scroll;
+    gap: 16px;
+    padding: 10px 0;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .scroll-container::-webkit-scrollbar {
+    display: none; /* Hide the scrollbar in Webkit browsers */
+  }
+  
+  .match-card {
+    min-width: 500px; /* Minimum width for each card */
+    flex: 0 0 auto; /* Prevent cards from shrinking or expanding */
+    margin-right: 16px;
+  }
+  
+  /* Mobile view adjustments */
+  @media (max-width: 768px) {
+    .match-card {
+      min-width: 200px; /* Smaller card size for mobile */
+    }
+    .scroll-container {
+      padding: 10px; /* Adjust padding for mobile */
+    }
+  }
+  
