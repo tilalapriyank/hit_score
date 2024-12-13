@@ -1,11 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { getRecentMatches } from "../../api/services/recentMatches"; // Import the getRecentMatches function
-import MatchCard from "./MatchCard"; // Assuming you have a MatchCard component to display individual match details
+import { Spin, Alert, Row, Col, Typography } from "antd";
+import { getRecentMatches } from "../../api/services/recentMatches";
+import MatchCard from "../../components/recentmatches/MatchCard";
+
+const { Title } = Typography;
+
+const getDistributedMatches = (matches, numColumns) => {
+  const columns = Array.from({ length: numColumns }, () => []);
+  let currentColumn = 0;
+
+  matches.forEach((matchDetail) => {
+    columns[currentColumn].push(matchDetail);
+    currentColumn = (currentColumn + 1) % numColumns;
+  });
+
+  return columns;
+};
 
 const RecentMatches = () => {
-  const [matches, setMatches] = useState([]); // State to store recent matches
-  const [loading, setLoading] = useState(true); // State to handle loading state
-  const [error, setError] = useState(null); // State for error handling
+  const [matches, setMatches] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchMatches = async () => {
@@ -13,32 +28,67 @@ const RecentMatches = () => {
       try {
         const data = await getRecentMatches();
         setMatches(data);
-        setLoading(false); // Set loading to false after fetching data
+        setLoading(false);
       } catch (err) {
-        setError("Failed to load recent matches."); // Error handling
-        setLoading(false); // Stop loading even in case of error
+        setError("Failed to load recent matches.");
+        setLoading(false);
       }
     };
 
-    fetchMatches(); // Fetch the data when the component mounts
-  }, []); // Empty dependency array ensures the fetch runs only once when the component mounts
+    fetchMatches();
+  }, []);
 
-  if (loading) return <div>Loading...</div>; // Show loading message while fetching
-  if (error) return <div>{error}</div>; // Show error message if there was an issue
-  console.log(matches);
-  return (
-    <section className="recent-matches py-5">
-      <div className="container">
-        <h2 className="text-center mb-4">Recent Matches</h2>
-        <div className="row">
-          {matches.map((match, index) => (
-            <div className="col-md-6 col-lg-4" key={index}>
-              <MatchCard match={match} />{" "}
-              {/* Pass each match data to MatchCard component */}
-            </div>
-          ))}
-        </div>
+  if (loading)
+    return (
+      <div style={{ textAlign: "center", padding: "50px" }}>
+        <Spin size="large" />
       </div>
+    );
+
+  if (error)
+    return (
+      <Alert
+        message="Error"
+        description={error}
+        type="error"
+        showIcon
+        style={{ margin: "20px" }}
+      />
+    );
+
+  const allMatches = matches.typeMatches
+    .flatMap((typeMatch) => typeMatch.seriesMatches.slice(0, 2))
+    .filter((match) => match.seriesAdWrapper)
+    .flatMap((match) => match.seriesAdWrapper.matches.slice(0, 2));
+
+  const numColumns = 4;
+  const columns = getDistributedMatches(allMatches, numColumns);
+
+  return (
+    <section style={{ padding: "20px" }}>
+      <Title level={2} style={{ textAlign: "center", marginBottom: "20px" }}>
+        Recent Matches
+      </Title>
+      <Row gutter={[16, 16]}>
+        {columns.map((columnMatches, columnIndex) => (
+          <Col xs={24} sm={12} lg={6} key={columnIndex}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "16px",
+              }}
+            >
+              {columnMatches.map((matchDetail) => (
+                <MatchCard
+                  key={matchDetail.matchInfo.matchId}
+                  match={matchDetail}
+                />
+              ))}
+            </div>
+          </Col>
+        ))}
+      </Row>
     </section>
   );
 };

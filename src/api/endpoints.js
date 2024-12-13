@@ -1,6 +1,7 @@
 import { BASE_URL } from "./apiConfig";
 
 export const ENDPOINTS = {
+  image: (imageId) => `${BASE_URL}img/v1/i1/c${imageId}/i.jpg`,
   recentMatches: `${BASE_URL}matches/v1/recent`,
   matchCenter: (matchId) => `${BASE_URL}mcenter/v1/${matchId}`,
   teamDetails: (matchId, teamId) =>

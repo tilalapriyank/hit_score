@@ -1,24 +1,17 @@
-import React from 'react';
-import LiveMatches from './LiveMatches';
-import ScheduledMatches from './ScheduledMatches';
-import RecentMatches from './RecentMatches';
-import NewsSection from './NewsSection';
+import React from "react";
+import { Layout, Typography } from "antd";
+import RecentMatches from "./RecentMatches";
 
-const HomePage = ({ liveMatchesData, scheduledMatchesData, recentMatchData, newsData }) => {
+const { Content, Header } = Layout;
+const { Title } = Typography;
+
+const HomePage = ({ recentMatchData }) => {
   return (
-    <div>
-      {/* Live Matches Section */}
-      {/* <LiveMatches liveMatches={liveMatchesData} /> */}
-
-      {/* Scheduled Matches Section */}
-      {/* <ScheduledMatches scheduledMatches={scheduledMatchesData} /> */}
-
-      {/* Recent Matches Section */}
-      <RecentMatches recentMatches={recentMatchData} />
-
-      {/* News Section */}
-      {/* <NewsSection news={newsData} /> */}
-    </div>
+    <Layout style={{ minHeight: "100vh" }}>
+      <Content style={{ padding: "20px" }}>
+        <RecentMatches recentMatches={recentMatchData} />
+      </Content>
+    </Layout>
   );
 };
 
