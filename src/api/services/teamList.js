@@ -6,6 +6,6 @@ export const getTeamList = async (type) => {
     const data = await apiFetch(ENDPOINTS.teamlist(type));
     return data;
   } catch (error) {
-    console.error("Error fetching recent matches:", error);
+    console.error("Error fetching teams:", error);
   }
 };

@@ -6,6 +6,6 @@ export const getScheduleMatches = async (type) => {
     const data = await apiFetch(ENDPOINTS.schedule(type));
     return data;
   } catch (error) {
-    console.error("Error fetching recent matches:", error);
+    console.error("Error fetching schedule matches:", error);
   }
 };

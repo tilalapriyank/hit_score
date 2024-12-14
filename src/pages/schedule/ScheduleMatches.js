@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getScheduleMatches } from "../../api/services/scheduleMatches";
-import { Tabs, Row, Typography, Spin } from "antd";
+import { Col, Tabs, Row, Typography, Spin } from "antd";
 import { TABS } from "../../utils/config";
-import ScheduleMatchCard from "./ScheduleMatchCard"; // Import the ScheduleMatchCard component
+import ScheduleMatchCard from "../../components/schedulematches/ScheduleMatchCard";
 
 const { TabPane } = Tabs;
 const { Title } = Typography;
@@ -30,7 +30,7 @@ const ScheduleMatches = () => {
 
   return (
     <section>
-      <Title level={2} style={{ textAlign: "center", marginBottom: "20px" }}>
+      <Title level={2} style={{ textAlign: "center", marginBottom: "30px" }}>
         Schedule Matches
       </Title>
       <Tabs activeKey={activeTab} onChange={setActiveTab} centered>
@@ -41,24 +41,57 @@ const ScheduleMatches = () => {
                 <Spin tip="Loading..." size="large" />
               </div>
             ) : (
-              <Row gutter={[16, 16]}>
-                {matches &&
-                  matches.map((matchGroup, groupIndex) => {
-                    return (
-                      matchGroup.matchScheduleList && (
-                        <div key={groupIndex}>
-                          <Title level={4} style={{ textAlign: "center" }}>
-                            {matchGroup.date}
-                          </Title>
-                          <Row gutter={[16, 16]}>
-                            {matchGroup.matchScheduleList.map((match, index) => (
-                              <ScheduleMatchCard key={match.matchId || index} match={match} />
-                            ))}
-                          </Row>
-                        </div>
-                      )
-                    );
-                  })}
+              <Row gutter={[24, 24]}>
+                {matches.map((match, key) => {
+                  const scheduleAdWrapper = match.scheduleAdWrapper;
+                  if (!scheduleAdWrapper) {
+                    return null;
+                  }
+                  return (
+                    <Col span={24} key={key} style={{ marginBottom: "30px" }}>
+                      <Title
+                        level={4}
+                        style={{
+                          background: "#f0f2f5",
+                          padding: "10px 15px",
+                          borderRadius: "8px",
+                        }}
+                      >
+                        {scheduleAdWrapper.date}
+                      </Title>
+
+                      <Row gutter={[16, 16]}>
+                        {scheduleAdWrapper.matchScheduleList.map(
+                          (matchDetail, index) => (
+                            <React.Fragment key={index}>
+                              <Col xs={24} sm={12} lg={6}>
+                                <Title level={5}>
+                                  {matchDetail.seriesName}
+                                </Title>
+                              </Col>
+                              <Col xs={24} sm={12} lg={18}>
+                                <Row gutter={[16, 16]}>
+                                  {/* Loop over the matches of the series */}
+                                  {matchDetail.matchInfo.map((match) => (
+                                    <Col
+                                      xs={24}
+                                      sm={12}
+                                      md={8}
+                                      lg={6}
+                                      key={match.matchId}
+                                    >
+                                      <ScheduleMatchCard match={match} />
+                                    </Col>
+                                  ))}
+                                </Row>
+                              </Col>
+                            </React.Fragment>
+                          )
+                        )}
+                      </Row>
+                    </Col>
+                  );
+                })}
               </Row>
             )}
           </TabPane>
