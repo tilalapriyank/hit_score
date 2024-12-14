@@ -1,8 +1,10 @@
 import { BASE_URL } from "./apiConfig";
 
 export const ENDPOINTS = {
-  image: (imageId) => `${BASE_URL}img/v1/i1/c${imageId}/i.jpg`,
-  recentMatches: `${BASE_URL}matches/v1/recent`,
+  image: (imageId) => `${BASE_URL}img/v1/i1/c${imageId}/i.jpg`, //use
+  recentMatches: `${BASE_URL}matches/v1/recent`, //use
+  liveMatches: `${BASE_URL}matches/v1/live`, 
+  upcomingMatches: `${BASE_URL}matches/v1/upcoming`, 
   matchCenter: (matchId) => `${BASE_URL}mcenter/v1/${matchId}`,
   teamDetails: (matchId, teamId) =>
     `${BASE_URL}mcenter/v1/${matchId}/team/${teamId}`,
@@ -35,7 +37,7 @@ export const ENDPOINTS = {
       `${BASE_URL}stats/v1/series/${seriesId}?statsType=mostRuns`,
   },
 
-  teamlist: (type) => `${BASE_URL}teams/v1/${type}`,
+  teamlist: (type) => `${BASE_URL}teams/v1/${type}`, //use
 
   teams: {
     schedule: (teamId) => `${BASE_URL}teams/v1/${teamId}/schedule`,
@@ -64,12 +66,12 @@ export const ENDPOINTS = {
   },
 
   news: {
-    index: `${BASE_URL}news/v1/index`,
+    index: `${BASE_URL}news/v1/index`, //use
     detail: (newsId) => `${BASE_URL}news/v1/detail/${newsId}`,
-    categories: `${BASE_URL}news/v1/cat`,
-    categoryDetails: (categoryId) => `${BASE_URL}news/v1/cat/${categoryId}`,
-    topics: `${BASE_URL}news/v1/topics`,
-    topicDetails: (topicId) => `${BASE_URL}news/v1/topics/${topicId}`,
+    categories: `${BASE_URL}news/v1/cat`, //use
+    categoryDetails: (categoryId) => `${BASE_URL}news/v1/cat/${categoryId}`, //use
+    topics: `${BASE_URL}news/v1/topics`, //use
+    topicDetails: (topicId) => `${BASE_URL}news/v1/topics/${topicId}`, //use
   },
 
   photos: {

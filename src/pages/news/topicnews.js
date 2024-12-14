@@ -1,29 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Row, Typography, Spin, Col } from "antd";
-import { getNewsByCategory } from "../../api/services/news";
-import NewsTabs from "../../components/news/tabs";
 import NewsCard from "../../components/news/newsCard";
-import { getTopNews } from "../../api/services/topnews";
-import NewsTopic from "../../components/news/newstopics"; // import your topic component
+import { getNewsByTopic } from "../../api/services/topicnews";
+import { useLocation, useParams } from "react-router-dom";
 
 const { Title } = Typography;
 
-const NewsPage = () => {
-  const [activeTab, setActiveTab] = useState("all");
+const TopicNewsPage = () => {
   const [newsItems, setNewsItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const fetchNews = async (tabId) => {
+  const location = useLocation();
+  console.log(location);
+  const { topic } = location.state || {};
+  const { id } = useParams();
+
+  const fetchNews = async (id) => {
     setLoading(true);
     try {
-      let data;
-      if (tabId === "all") {
-        data = await getTopNews();
-        setNewsItems(data.storyList || []);
-      } else {
-        const newsData = await getNewsByCategory(tabId);
-        setNewsItems(newsData.storyList || []);
-      }
+      const data = await getNewsByTopic(id);
+      setNewsItems(data.storyList || []);
     } catch (error) {
       console.error("Error fetching news:", error);
     } finally {
@@ -32,23 +28,21 @@ const NewsPage = () => {
   };
 
   useEffect(() => {
-    fetchNews(activeTab);
-  }, [activeTab]);
+    if (id) {
+      fetchNews(id); 
+    }
+  }, [id]);
 
   return (
     <div className="news-container" style={{ padding: "20px" }}>
       <Title level={2} style={{ textAlign: "center", marginBottom: "20px" }}>
-        News
+        {topic}
       </Title>
-
-      <NewsTabs onTabChange={setActiveTab} />
 
       {loading ? (
         <div style={{ textAlign: "center", marginTop: "20px" }}>
           <Spin tip="Loading News..." size="large" />
         </div>
-      ) : activeTab === "topics" ? (
-        <NewsTopic />
       ) : (
         <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
           {newsItems
@@ -64,4 +58,4 @@ const NewsPage = () => {
   );
 };
 
-export default NewsPage;
+export default TopicNewsPage;

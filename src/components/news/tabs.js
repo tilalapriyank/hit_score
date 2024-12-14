@@ -58,6 +58,7 @@ const NewsTabs = ({ onTabChange }) => {
       type="line"
     >
       <TabPane tab="All Stories" key="all" />
+      <TabPane tab="Topics" key="topics" />
       {storyTypes.map((story) => (
         <TabPane tab={story.name} key={story.id} />
       ))}
