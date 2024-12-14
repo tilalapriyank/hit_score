@@ -9,12 +9,7 @@ export const ENDPOINTS = {
   matchOvers: (matchId) => `${BASE_URL}mcenter/v1/${matchId}/overs`,
   matchScorecard: (matchId) => `${BASE_URL}mcenter/v1/${matchId}/hscard`,
 
-  schedule: {
-    international: `${BASE_URL}schedule/v1/international`,
-    domestic: `${BASE_URL}schedule/v1/domestic`,
-    women: `${BASE_URL}schedule/v1/women`,
-    league: `${BASE_URL}schedule/v1/league`,
-  },
+  schedule: (type) => `${BASE_URL}schedule/v1/${type}`,
 
   series: {
     international: `${BASE_URL}series/v1/international`,
@@ -40,11 +35,9 @@ export const ENDPOINTS = {
       `${BASE_URL}stats/v1/series/${seriesId}?statsType=mostRuns`,
   },
 
+  teamlist: (type) => `${BASE_URL}teams/v1/${type}`,
+
   teams: {
-    international: `${BASE_URL}teams/v1/international`,
-    domestic: `${BASE_URL}teams/v1/domestic`,
-    women: `${BASE_URL}teams/v1/women`,
-    league: `${BASE_URL}teams/v1/league`,
     schedule: (teamId) => `${BASE_URL}teams/v1/${teamId}/schedule`,
     results: (teamId) => `${BASE_URL}teams/v1/${teamId}/results`,
     news: (teamId) => `${BASE_URL}news/v1/team/${teamId}`,

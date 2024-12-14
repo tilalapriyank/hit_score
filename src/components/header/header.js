@@ -53,12 +53,13 @@ const HeaderComponent = () => {
             defaultSelectedKeys={["1"]}
             items={[
               { label: <Link to="/">Home</Link>, key: "1" },
-              { label: <Link to="/matches">Matches</Link>, key: "2" },
-              { label: <Link to="/teams">Teams</Link>, key: "3" },
-              { label: <Link to="/news">News</Link>, key: "4" },
-              { label: <Link to="/players">Players</Link>, key: "5" },
-              { label: <Link to="/ranking">Ranking</Link>, key: "6" },
-              { label: <Link to="/archives">Archives</Link>, key: "7" },
+              { label: <Link to="/schedule">Schedule</Link>, key: "2" },
+              { label: <Link to="/recent">Recent</Link>, key: "3" },
+              { label: <Link to="/teams">Teams</Link>, key: "4" },
+              { label: <Link to="/news">News</Link>, key: "5" },
+              { label: <Link to="/players">Players</Link>, key: "6" },
+              { label: <Link to="/ranking">Ranking</Link>, key: "7" },
+              { label: <Link to="/archives">Archives</Link>, key: "8" },
             ]}
           />
         </Col>
@@ -103,12 +104,13 @@ const HeaderComponent = () => {
           onClick={toggleDrawer} // Close the drawer when an item is clicked
           items={[
             { label: <Link to="/">Home</Link>, key: "1" },
-            { label: <Link to="/matches">Matches</Link>, key: "2" },
-            { label: <Link to="/teams">Teams</Link>, key: "3" },
-            { label: <Link to="/news">News</Link>, key: "4" },
-            { label: <Link to="/players">Players</Link>, key: "5" },
-            { label: <Link to="/ranking">Ranking</Link>, key: "6" },
-            { label: <Link to="/archives">Archives</Link>, key: "7" },
+            { label: <Link to="/schedule">Schedule</Link>, key: "2" },
+            { label: <Link to="/recent">Recent</Link>, key: "3" },
+            { label: <Link to="/teams">Teams</Link>, key: "4" },
+            { label: <Link to="/news">News</Link>, key: "5" },
+            { label: <Link to="/players">Players</Link>, key: "6" },
+            { label: <Link to="/ranking">Ranking</Link>, key: "7" },
+            { label: <Link to="/archives">Archives</Link>, key: "8" },
           ]}
         />
       </Drawer>
