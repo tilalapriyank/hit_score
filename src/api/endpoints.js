@@ -18,12 +18,10 @@ export const ENDPOINTS = {
     domestic: `${BASE_URL}series/v1/domestic`,
     women: `${BASE_URL}series/v1/women`,
     league: `${BASE_URL}series/v1/league`,
-    archives: {
-      international: `${BASE_URL}series/v1/archives/international`,
-      domestic: `${BASE_URL}series/v1/archives/domestic`,
-      women: `${BASE_URL}series/v1/archives/women`,
-      league: `${BASE_URL}series/v1/archives/league`,
-    },
+
+    archives: (type, year) =>
+      `${BASE_URL}series/v1/archives/${type}?year=${year}`,
+
     details: (seriesId) => `${BASE_URL}series/v1/${seriesId}`,
     news: (seriesId) => `${BASE_URL}news/v1/series/${seriesId}`,
     squads: (seriesId) => `${BASE_URL}series/v1/${seriesId}/squads`,
