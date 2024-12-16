@@ -6,10 +6,10 @@ import { Link } from "react-router-dom";
 const { Text } = Typography;
 
 const MatchCard = ({ match }) => {
-  const team1Innings1 = match.matchScore?.team1Score?.inngs1?.runs || "-";
-  const team1Innings2 = match.matchScore?.team1Score?.inngs2?.runs || "-";
-  const team2Innings1 = match.matchScore?.team2Score?.inngs1?.runs || "-";
-  const team2Innings2 = match.matchScore?.team2Score?.inngs2?.runs || "-";
+  const team1Innings1 = match.matchScore?.team1Score?.inngs1?.runs || " ";
+  const team1Innings2 = match.matchScore?.team1Score?.inngs2?.runs || " ";
+  const team2Innings1 = match.matchScore?.team2Score?.inngs1?.runs || " ";
+  const team2Innings2 = match.matchScore?.team2Score?.inngs2?.runs || " ";
 
   return (
     <Link to={`/match-details/${match.matchInfo.matchId}`}>
@@ -45,7 +45,7 @@ const MatchCard = ({ match }) => {
             </Col>
             <Col>
               <Text>{team1Innings1}</Text>
-              {team1Innings2 !== "-" && (
+              {team1Innings2 !== " " && (
                 <Text> &nbsp;&amp;&nbsp;{team1Innings2}</Text>
               )}
             </Col>
@@ -64,7 +64,7 @@ const MatchCard = ({ match }) => {
             </Col>
             <Col>
               <Text>{team2Innings1}</Text>
-              {team2Innings2 !== "-" && (
+              {team2Innings2 !== " " && (
                 <Text> &nbsp;&amp;&nbsp;{team2Innings2}</Text>
               )}
             </Col>
@@ -81,6 +81,8 @@ const MatchCard = ({ match }) => {
                 ? "success"
                 : match.matchInfo.state === "Toss"
                 ? "warning"
+                : match.matchInfo.state === "Upcoming" || match.matchInfo.state === "Preview"
+                ? "default"
                 : "danger"
             }
             strong

@@ -12,6 +12,7 @@ import TrendingPage from "./pages/players/players";
 import RankingsPage from "./pages/rankings/ranking";
 import Archives from "./pages/archives/archives";
 import LiveMatches from "./pages/live/livematches"
+import UpcomingMatches from "./pages/upcoming/upcoming";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/schedule" element={<ScheduleMactches />} />
           <Route path="/recent" element={<RecentMatches />} />
           <Route path="/live" element={<LiveMatches />} />
+          <Route path="/upcoming" element={<UpcomingMatches />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/players" element={<TrendingPage />} />
