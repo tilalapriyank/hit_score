@@ -8,6 +8,7 @@ import Teams from "./pages/teams/teams";
 import ScheduleMactches from "./pages/schedule/ScheduleMatches";
 import NewsPage from "./pages/news/news";
 import TopicNewsPage from "./pages/news/topicnews";
+import TrendingPage from "./pages/players/players";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/recent" element={<RecentMatches />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/news" element={<NewsPage />} />
-          <Route path="/players" element={<h1>Players Page</h1>} />
+          <Route path="/players" element={<TrendingPage/>} />
           <Route path="/ranking" element={<h1>Ranking Page</h1>} />
           <Route path="/archives" element={<h1>Archives Page</h1>} />
           <Route path="/contact-us" element={<h1>Contact Us Page</h1>} />

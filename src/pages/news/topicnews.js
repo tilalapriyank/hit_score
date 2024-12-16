@@ -11,7 +11,6 @@ const TopicNewsPage = () => {
   const [loading, setLoading] = useState(false);
 
   const location = useLocation();
-  console.log(location);
   const { topic } = location.state || {};
   const { id } = useParams();
 
