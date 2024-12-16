@@ -3,8 +3,8 @@ import { BASE_URL } from "./apiConfig";
 export const ENDPOINTS = {
   image: (imageId) => `${BASE_URL}img/v1/i1/c${imageId}/i.jpg`, //use
   recentMatches: `${BASE_URL}matches/v1/recent`, //use
-  liveMatches: `${BASE_URL}matches/v1/live`, 
-  upcomingMatches: `${BASE_URL}matches/v1/upcoming`, 
+  liveMatches: `${BASE_URL}matches/v1/live`,
+  upcomingMatches: `${BASE_URL}matches/v1/upcoming`,
   matchCenter: (matchId) => `${BASE_URL}mcenter/v1/${matchId}`,
   teamDetails: (matchId, teamId) =>
     `${BASE_URL}mcenter/v1/${matchId}/team/${teamId}`,
@@ -80,8 +80,10 @@ export const ENDPOINTS = {
     image: (imagePath) => `${BASE_URL}img/v1/${imagePath}`,
   },
 
-  rankings: (playerType, format) =>
-    `${BASE_URL}stats/v1/rankings/${playerType}?formatType=${format}`,
+  rankings: (playerType, format, isWomen) =>
+    `${BASE_URL}stats/v1/rankings/${playerType}?formatType=${format}&isWomen=${
+      isWomen ? 1 : 0
+    }`,
 
   iccStandings: {
     teamMatchType1: `${BASE_URL}stats/v1/iccstanding/team/matchtype/1`,

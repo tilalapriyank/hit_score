@@ -1,6 +1,6 @@
 
 // API key
-export const API_KEY = "dd76d23715msh3ae2c9a68068085p1e4b89jsnb016433712a0";
+export const API_KEY = "368af94cf6msh643b0a2deb7379dp1c9b02jsn34e51b16fb12";
 
 // API host
 export const API_HOST = "cricbuzz-cricket.p.rapidapi.com";

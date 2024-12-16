@@ -9,6 +9,7 @@ import ScheduleMactches from "./pages/schedule/ScheduleMatches";
 import NewsPage from "./pages/news/news";
 import TopicNewsPage from "./pages/news/topicnews";
 import TrendingPage from "./pages/players/players";
+import RankingsPage from "./pages/rankings/ranking"
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           <Route path="/teams" element={<Teams />} />
           <Route path="/news" element={<NewsPage />} />
           <Route path="/players" element={<TrendingPage/>} />
-          <Route path="/ranking" element={<h1>Ranking Page</h1>} />
+          <Route path="/ranking" element={<RankingsPage />} />
           <Route path="/archives" element={<h1>Archives Page</h1>} />
           <Route path="/contact-us" element={<h1>Contact Us Page</h1>} />
           <Route path="/news/info/:id" element={<TopicNewsPage />} />
