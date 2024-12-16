@@ -13,6 +13,7 @@ import RankingsPage from "./pages/rankings/ranking";
 import Archives from "./pages/archives/archives";
 import LiveMatches from "./pages/live/livematches"
 import UpcomingMatches from "./pages/upcoming/upcoming";
+import Match from "./pages/detailpages/match/match";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/ranking" element={<RankingsPage />} />
           <Route path="/archives" element={<Archives />} />
           <Route path="/news/info/:id" element={<TopicNewsPage />} />
+          <Route path="/match-details/:id" element={<Match />} />
         </Routes>
       </div>
     </Router>
