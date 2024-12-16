@@ -9,8 +9,9 @@ import ScheduleMactches from "./pages/schedule/ScheduleMatches";
 import NewsPage from "./pages/news/news";
 import TopicNewsPage from "./pages/news/topicnews";
 import TrendingPage from "./pages/players/players";
-import RankingsPage from "./pages/rankings/ranking"
+import RankingsPage from "./pages/rankings/ranking";
 import Archives from "./pages/archives/archives";
+import LiveMatches from "./pages/live/livematches"
 
 function App() {
   return (
@@ -21,12 +22,12 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/schedule" element={<ScheduleMactches />} />
           <Route path="/recent" element={<RecentMatches />} />
+          <Route path="/live" element={<LiveMatches />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/news" element={<NewsPage />} />
-          <Route path="/players" element={<TrendingPage/>} />
+          <Route path="/players" element={<TrendingPage />} />
           <Route path="/ranking" element={<RankingsPage />} />
-          <Route path="/archives" element={<Archives/>} />
-          <Route path="/contact-us" element={<h1>Contact Us Page</h1>} />
+          <Route path="/archives" element={<Archives />} />
           <Route path="/news/info/:id" element={<TopicNewsPage />} />
         </Routes>
       </div>

@@ -75,7 +75,16 @@ const MatchCard = ({ match }) => {
           align="middle"
           style={{ marginTop: "16px" }}
         >
-          <Text type="success" strong>
+          <Text
+            type={
+              match.matchInfo.state === "Complete"
+                ? "success"
+                : match.matchInfo.state === "Toss"
+                ? "warning"
+                : "danger"
+            }
+            strong
+          >
             {match.matchInfo.status}
           </Text>
         </Row>
