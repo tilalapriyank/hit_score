@@ -9,7 +9,7 @@ const getDistributedMatches = (matches, numColumns) => {
   const columns = Array.from({ length: numColumns }, () => []);
   let currentColumn = 0;
 
-  matches.forEach((matchDetail) => {
+  matches && matches.forEach((matchDetail) => {
     columns[currentColumn].push(matchDetail);
     currentColumn = (currentColumn + 1) % numColumns;
   });
@@ -56,7 +56,7 @@ const UpcomingMatches = () => {
       />
     );
 
-  const allMatches = matches.typeMatches
+  const allMatches = matches && matches.typeMatches
     .flatMap((typeMatch) => typeMatch.seriesMatches.slice(0, 3))
     .filter((match) => match.seriesAdWrapper)
     .flatMap((match) => match.seriesAdWrapper.matches.slice(0, 2));

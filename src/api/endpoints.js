@@ -3,8 +3,8 @@ import { BASE_URL } from "./apiConfig";
 export const ENDPOINTS = {
   image: (imageId) => `${BASE_URL}img/v1/i1/c${imageId}/i.jpg`, //use
   recentMatches: `${BASE_URL}matches/v1/recent`, //use
-  liveMatches: `${BASE_URL}matches/v1/live`,//use
-  upcomingMatches: `${BASE_URL}matches/v1/upcoming`,//use
+  liveMatches: `${BASE_URL}matches/v1/live`, //use
+  upcomingMatches: `${BASE_URL}matches/v1/upcoming`, //use
   matchCenter: (matchId) => `${BASE_URL}mcenter/v1/${matchId}`,
   teamDetails: (matchId, teamId) =>
     `${BASE_URL}mcenter/v1/${matchId}/team/${teamId}`,
