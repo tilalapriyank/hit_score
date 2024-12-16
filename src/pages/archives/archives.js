@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { getArchives } from "../../api/services/archives";
-import { Select, Spin, Table, Typography, Row, Col, Tabs, Card } from "antd";
+import { Select, Spin, Typography, Row, Col, Tabs } from "antd";
+import ArchivesItem from "../../components/archives/ArchivesItem"; 
 
 const { Title } = Typography;
 const { TabPane } = Tabs;
 
 const Archives = () => {
-  const [archivesData, setArchivesData] = useState([]);
+  const [archivesData, setArchivesData] = useState({ series: [] });
   const [type, setType] = useState("international");
-  const [year, setYear] = useState("2024");
+  const [year, setYear] = useState(new Date().getFullYear().toString()); // Default to current year
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -17,7 +18,7 @@ const Archives = () => {
       setLoading(true);
       try {
         const data = await getArchives(type, year);
-        setArchivesData(data);
+        setArchivesData(data.seriesMapProto[0] || { series: [] }); // Handle empty series data gracefully
       } catch (error) {
         setError("Error fetching archives.");
         console.error("Error fetching archives:", error);
@@ -29,50 +30,28 @@ const Archives = () => {
     fetchArchives();
   }, [type, year]);
 
-  // Columns for the table
-  const columns = [
-    {
-      title: "Match",
-      dataIndex: "matchName",
-      key: "matchName",
-      render: (text) => <a href={`/match/${text}`}>{text}</a>,
-    },
-    {
-      title: "Date",
-      dataIndex: "matchDate",
-      key: "matchDate",
-    },
-    {
-      title: "Type",
-      dataIndex: "matchType",
-      key: "matchType",
-    },
-    {
-      title: "Details",
-      key: "details",
-      render: (text, record) => (
-        <a href={`/match-details/${record.matchId}`}>View Details</a>
-      ),
-    },
-  ];
+  // Generate year options from 1877 to current year
+  const generateYears = () => {
+    const years = [];
+    const currentYear = new Date().getFullYear();
+    for (let i = 1877; i <= currentYear; i++) {
+      years.push(i.toString());
+    }
+    return years;
+  };
 
   return (
     <div style={{ padding: "20px" }}>
       <Title level={2}>Archives</Title>
 
-      {/* Filters for Type and Year */}
+      <Tabs defaultActiveKey={type} onChange={(key) => setType(key)}>
+        <TabPane tab="International" key="international" />
+        <TabPane tab="Domestic" key="domestic" />
+        <TabPane tab="Women" key="women" />
+        <TabPane tab="League" key="league" />
+      </Tabs>
+
       <Row gutter={16} style={{ marginBottom: "20px" }}>
-        <Col span={8}>
-          <Title level={4}>Select Type</Title>
-          <Select
-            defaultValue={type}
-            onChange={(value) => setType(value)}
-            style={{ width: "100%" }}
-          >
-            <Select.Option value="international">International</Select.Option>
-            <Select.Option value="domestic">Domestic</Select.Option>
-          </Select>
-        </Col>
         <Col span={8}>
           <Title level={4}>Select Year</Title>
           <Select
@@ -80,70 +59,31 @@ const Archives = () => {
             onChange={(value) => setYear(value)}
             style={{ width: "100%" }}
           >
-            <Select.Option value="2024">2024</Select.Option>
-            <Select.Option value="2023">2023</Select.Option>
-            <Select.Option value="2022">2022</Select.Option>
+            {generateYears().map((yearOption) => (
+              <Select.Option key={yearOption} value={yearOption}>
+                {yearOption}
+              </Select.Option>
+            ))}
           </Select>
         </Col>
       </Row>
 
-      {/* Loading Spinner */}
       {loading ? (
         <Spin size="large" tip="Loading archives..." />
       ) : error ? (
         <div>{error}</div>
       ) : (
-        <>
-          {/* Tab Panel for different match types */}
-          <Tabs defaultActiveKey="1" style={{ marginBottom: "20px" }}>
-            <TabPane tab="All Matches" key="1">
-              <Table
-                columns={columns}
-                dataSource={archivesData}
-                rowKey="matchId"
-                pagination={{ pageSize: 10 }}
-                loading={loading}
-                bordered
-              />
-            </TabPane>
-            <TabPane tab="International Matches" key="2">
-              <Table
-                columns={columns}
-                dataSource={archivesData.filter((match) => match.type === "international")}
-                rowKey="matchId"
-                pagination={{ pageSize: 10 }}
-                loading={loading}
-                bordered
-              />
-            </TabPane>
-            <TabPane tab="Domestic Matches" key="3">
-              <Table
-                columns={columns}
-                dataSource={archivesData.filter((match) => match.type === "domestic")}
-                rowKey="matchId"
-                pagination={{ pageSize: 10 }}
-                loading={loading}
-                bordered
-              />
-            </TabPane>
-          </Tabs>
-
-          {/* Responsive Card Grid */}
-          <Row gutter={16}>
-            {archivesData.map((item) => (
-              <Col span={8} key={item.matchId}>
-                <Card
-                  hoverable
-                  title={item.matchName}
-                  extra={<a href={`/match-details/${item.matchId}`}>Details</a>}
-                >
-                  <p>{item.matchDate}</p>
-                  <p>{item.matchType}</p>
-                </Card>
+        <Row gutter={16}>
+          {archivesData.series && archivesData.series.length > 0 ? (
+            archivesData.series.map((item) => (
+              <Col span={8} key={item.id} style={{ marginBottom: "16px" }}>
+                <ArchivesItem item={item} /> {/* Use ArchivesItem for each archive */}
               </Col>
-            ))}
-          </Row>
-        </>
+            ))
+          ) : (
+            <div>No archives available.</div>
+          )}
+        </Row>
       )}
     </div>
   );
