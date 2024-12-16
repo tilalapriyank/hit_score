@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Typography } from "antd";
-import ImageComponent from "../../../../components/image/image";
+import ImageComponent from "../../../image/image";
 
 const { Title } = Typography;
 

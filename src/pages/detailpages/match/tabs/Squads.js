@@ -1,9 +1,7 @@
-// src/components/Squads.js
-
 import React, { useEffect, useState } from "react";
 import { Row, Col, Card, Typography, Spin, Alert } from "antd";
 import { getMatchSquad } from "../../../../api/services/matchsquad";
-import SquadCard from "./SquadCard";
+import SquadCard from "../../../../components/details/match/squad/SquadCard";
 
 const { Title } = Typography;
 
@@ -17,11 +15,9 @@ const Squads = ({ matchId, team1Id, team2Id, team1Name, team2Name }) => {
     const fetchMatchSquads = async () => {
       setLoading(true);
       try {
-        // Fetch squad info for both teams
         const team1Data = await getMatchSquad(matchId, team1Id);
         const team2Data = await getMatchSquad(matchId, team2Id);
 
-        // Set the squad data in state
         setTeam1Squad(team1Data);
         setTeam2Squad(team2Data);
         setLoading(false);
