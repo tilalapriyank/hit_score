@@ -34,7 +34,6 @@ const Details = ({ matchId }) => {
     return <Alert message="Error" description={error} type="error" showIcon />;
   }
 
-  // Check if matchInfo is available
   if (!matchInfo) {
     return (
       <Alert
@@ -46,11 +45,9 @@ const Details = ({ matchId }) => {
     );
   }
 
-  // Destructuring matchInfo
   const { team1, team2, series, venue, matchStartTimestamp } =
     matchInfo.matchInfo;
 
-  // Formatting date and time
   const matchDate = new Date(matchStartTimestamp);
   const formattedDate = matchDate.toLocaleDateString("en-US", {
     year: "numeric",

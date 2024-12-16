@@ -4,7 +4,6 @@ const Live = ({ matchId }) => {
   const [matchInfo, setMatchInfo] = useState(null);
 
   useEffect(() => {
-    // Fetch match info based on matchId
     fetch(`/api/match/${matchId}`)
       .then((response) => response.json())
       .then((data) => setMatchInfo(data));
