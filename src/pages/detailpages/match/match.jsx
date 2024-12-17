@@ -98,7 +98,7 @@ const Match = () => {
         </Row>
       </Card>
 
-      <Tabs defaultActiveKey="scorecard">
+      <Tabs defaultActiveKey="overs">
         {MatchTabs.map((tab) => {
           const Component = TabComponents[tab.key];
           const teamsIds = tab.key === "squads" ? { team1Id: team1.id, team2Id: team2.id } : null;

@@ -1,24 +1,37 @@
 import React, { useEffect, useState } from "react";
+import { getMatchOvers } from "../../../../api/services/matchovers";
+import MatchInfo from "./MatchInfo";
+import MatchOvers from "./MatchOvers";
+import { Spin, Alert } from "antd";
 
 const Overs = ({ matchId }) => {
-  const [matchInfo, setMatchInfo] = useState(null);
+  const [matchOvers, setMatchOvers] = useState(null);
+  const [matchMini, setMatchMini] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`/api/match/${matchId}`)
-      .then((response) => response.json())
-      .then((data) => setMatchInfo(data));
+    const fetchOvers = async (id) => {
+      setLoading(true);
+      try {
+        const data = await getMatchOvers(id);
+        setMatchOvers(data.overSepList);
+        setMatchMini(data.miniscore);
+      } catch (error) {
+        setError("Failed to load match Scorecard.");
+      }
+      setLoading(false);
+    };
+    fetchOvers(matchId);
   }, [matchId]);
 
+  if (loading) return <Spin size="large" />;
+  if (error) return <Alert message={error} type="error" />;
+  
   return (
     <div>
-      {matchInfo ? (
-        <div>
-          <h2>{matchInfo.title}</h2>
-          <p>{matchInfo.description}</p>
-        </div>
-      ) : (
-        <p>Loading match info...</p>
-      )}
+      <MatchInfo matchMini={matchMini} />
+      <MatchOvers matchOvers={matchOvers} />
     </div>
   );
 };
