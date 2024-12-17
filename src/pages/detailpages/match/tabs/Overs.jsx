@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getMatchOvers } from "../../../../api/services/matchovers";
-import MatchInfo from "./MatchInfo";
-import MatchOvers from "./MatchOvers";
+import MatchInfo from "../../../../components/details/match/overs/MatchInfo";
+import MatchOvers from "../../../../components/details/match/overs/MatchOvers";
 import { Spin, Alert } from "antd";
 
 const Overs = ({ matchId }) => {
