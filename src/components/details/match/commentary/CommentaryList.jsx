@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Typography } from "antd";
+import { Card, Row, Col, Typography } from "antd";
 
 const { Text } = Typography;
 
@@ -64,21 +64,128 @@ const CommentaryList = ({ matchCommentary }) => {
     );
   };
 
-  const isEndOfOver = (overNumber) => {
-    // Check if the overNumber ends in .6, indicating the last ball of the over
-    return overNumber % 1 === 0.6 || overNumber % 1 === 0;
-  };
-
   return (
     <div style={{ padding: "20px", background: "#f9f9f9" }}>
       {matchCommentary.map((item, index) => {
-        const isEndOfOverFlag = isEndOfOver(item.overNumber);
         return (
           <div key={index}>
+            {item.event === "over-break" && (
+              <Card
+                style={{
+                  marginBottom: "16px",
+                  boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                  borderRadius: "8px",
+                  backgroundColor: "#c6c6c6",
+                  color: "#000",
+                }}
+              >
+                <Row
+                  gutter={[8, 8]}
+                  style={{ fontSize: "12px", color: "#555" }}
+                >
+                  {/* Column 1: Over Number */}
+                  <Col
+                    span={4}
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      fontWeight: "bold",
+                      fontSize: "14px",
+                      color: "#333",
+                    }}
+                  >
+                    {Math.round(item.overNumber)}
+                  </Col>
+
+                  {/* Column 2: Runs Scored */}
+                  <Col
+                    span={4}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Text strong>Runs Scored: {item.overSeparator.runs}</Text>
+                    <Text>{item.overSeparator.o_summary}</Text>
+                  </Col>
+
+                  {/* Column 3: Score After Over */}
+                  <Col
+                    span={4}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      fontSize: "14px",
+                      color: "#333",
+                    }}
+                  >
+                    <Text>{`Score after ${Math.round(
+                      item.overNumber
+                    )} overs`}</Text>
+                    <Text>
+                      {item.overSeparator.batTeamName}{" "}
+                      {item.overSeparator.score}-{item.overSeparator.wickets}
+                    </Text>
+                  </Col>
+
+                  {/* Column 4: Batsmen Details */}
+                  <Col
+                    span={4}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Text strong>
+                      {item.overSeparator.batStrikerNames[0]}{" "}
+                      {item.overSeparator.batStrikerRuns}(
+                      {item.overSeparator.batStrikerBalls})
+                    </Text>
+                    <Text>
+                      {item.overSeparator.batNonStrikerNames[0]}{" "}
+                      {item.overSeparator.batNonStrikerRuns}(
+                      {item.overSeparator.batNonStrikerBalls})
+                    </Text>
+                  </Col>
+
+                  {/* Column 5: Bowler Details */}
+                  <Col
+                    span={4}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      textAlign: "center",
+                    }}
+                  >
+                    <Text strong>{item.overSeparator.bowlNames[0]}</Text>
+                    <Text>
+                      {item.overSeparator.bowlOvers}-
+                      {item.overSeparator.bowlMaidens}-
+                      {item.overSeparator.bowlRuns}-
+                      {item.overSeparator.bowlWickets}
+                    </Text>
+                  </Col>
+                </Row>
+              </Card>
+            )}
+
             <Card
               style={{
                 marginBottom: "16px",
-                padding: "12px", // Reduced padding
+                padding: "12px",
                 boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
                 borderRadius: "8px",
                 backgroundColor: "#ffffff",
@@ -91,7 +198,6 @@ const CommentaryList = ({ matchCommentary }) => {
                   gap: "8px",
                 }}
               >
-                {/* Ball Info (Over Number) */}
                 {item.ballNbr !== 0 && (
                   <div
                     style={{
@@ -105,7 +211,6 @@ const CommentaryList = ({ matchCommentary }) => {
                     </Text>
                   </div>
                 )}
-                {/* Commentary Text */}
                 <div
                   style={{ flex: "1 1 auto", fontSize: "14px", color: "#555" }}
                 >
@@ -113,44 +218,6 @@ const CommentaryList = ({ matchCommentary }) => {
                 </div>
               </div>
             </Card>
-
-            {/* Render over separator and score details after every over (end of each over) */}
-            {isEndOfOverFlag && item.event === "over-break" && (
-              <div
-                style={{
-                  marginTop: "16px",
-                  padding: "12px",
-                  backgroundColor: "#f0f0f0",
-                  borderRadius: "8px",
-                  boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
-                }}
-              >
-                <Text strong style={{ fontSize: "14px", color: "#333" }}>
-                  Score: {item.overSeparator.score} /{" "}
-                  {item.overSeparator.wickets}
-                </Text>
-                <div style={{ marginTop: "8px" }}>
-                  <Text style={{ fontSize: "12px", color: "#555" }}>
-                    {`Batsman: ${item.overSeparator.batStrikerNames[0]} - Runs: ${item.overSeparator.batStrikerRuns} (Balls: ${item.overSeparator.batStrikerBalls})`}
-                  </Text>
-                </div>
-                <div style={{ marginTop: "4px" }}>
-                  <Text style={{ fontSize: "12px", color: "#555" }}>
-                    {`Non-Striker: ${item.overSeparator.batNonStrikerNames[0]} - Runs: ${item.overSeparator.batNonStrikerRuns} (Balls: ${item.overSeparator.batNonStrikerBalls})`}
-                  </Text>
-                </div>
-                <div style={{ marginTop: "4px" }}>
-                  <Text style={{ fontSize: "12px", color: "#555" }}>
-                    {`Bowler: ${item.overSeparator.bowlNames[0]} - Overs: ${item.overSeparator.bowlOvers} (Runs: ${item.overSeparator.bowlRuns}, Wickets: ${item.overSeparator.bowlWickets})`}
-                  </Text>
-                </div>
-                <div style={{ marginTop: "4px" }}>
-                  <Text style={{ fontSize: "12px", color: "#555" }}>
-                    {`Summary: ${item.overSeparator.o_summary}`}
-                  </Text>
-                </div>
-              </div>
-            )}
           </div>
         );
       })}

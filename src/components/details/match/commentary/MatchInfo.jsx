@@ -17,6 +17,8 @@ const MatchInfo = ({ matchMini }) => {
     recentOvsStats: curOvsStats,
     batTeam,
     matchScoreDetails,
+    latestPerformance,
+    matchUdrs,
   } = matchMini;
 
   // Extracting innings scores for both teams
@@ -43,6 +45,12 @@ const MatchInfo = ({ matchMini }) => {
 
   const formattedOvers = battingTeamOvers.toFixed(1);
 
+  const team1 = matchScoreDetails.inningsScoreList.find(
+    (team) => team.batTeamId === udrs.team1Id
+  );
+  const team2 = matchScoreDetails.inningsScoreList.find(
+    (team) => team.batTeamId === udrs.team2Id
+  );
   return (
     <Card
       bordered={false}
@@ -53,6 +61,8 @@ const MatchInfo = ({ matchMini }) => {
           <Tag color="blue" style={{ fontSize: "12px" }}>
             CRR: {crr}
           </Tag>
+          <br />
+          <span style={{ color: "red" }}>{matchScoreDetails.customStatus}</span>
         </span>
       }
       style={{
@@ -157,8 +167,8 @@ const MatchInfo = ({ matchMini }) => {
           {/* Partnership */}
           <Row gutter={10}>
             <Col span={12}>
-              <Text strong>Partnership:</Text> {partnership.runs} runs,{" "}
-              {partnership.balls} balls
+              <Text strong>Partnership:</Text> {partnership.runs}
+              {`(${partnership.balls})`}
             </Col>
           </Row>
 
@@ -167,6 +177,28 @@ const MatchInfo = ({ matchMini }) => {
               <Text strong>Last Wkt:</Text> {lastWkt}
             </Col>
           </Row>
+          <Row>
+            <Col span={12}>
+              <Text strong>{latestPerformance.label}:</Text>{" "}
+              {latestPerformance.runs} Runs, {latestPerformance.wkts} Wickets
+            </Col>
+          </Row>
+          {matchUdrs && (
+            <Row gutter={10}>
+              <Col span={12}>
+                <Text strong>UDRS - {team1?.batTeamShortName}: </Text>
+                {matchUdrs.team1Remaining ?? "0"} Remaining,{" "}
+                {matchUdrs.team1Successful ?? "0"} Successful,{" "}
+                {matchUdrs.team1Unsuccessful ?? "0"} Unsuccessful
+              </Col>
+              <Col span={12}>
+                <Text strong>{team2?.batTeamShortName}: </Text>
+                {matchUdrs.team2Remaining ?? "0"} Remaining,{" "}
+                {matchUdrs.team2Successful ?? "0"} Successful,{" "}
+                {matchUdrs.team2Unsuccessful ?? "0"} Unsuccessful
+              </Col>
+            </Row>
+          )}
         </Col>
       </Row>
     </Card>
