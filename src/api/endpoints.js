@@ -9,6 +9,7 @@ export const ENDPOINTS = {
   teamDetails: (matchId, teamId) =>
     `${BASE_URL}mcenter/v1/${matchId}/team/${teamId}`,
   matchOvers: (matchId) => `${BASE_URL}mcenter/v1/${matchId}/overs`,
+  matchCommemtary: (matchId) => `${BASE_URL}mcenter/v1/${matchId}/comm`,
   matchScorecard: (matchId) => `${BASE_URL}mcenter/v1/${matchId}/hscard`,
 
   schedule: (type) => `${BASE_URL}schedule/v1/${type}`,

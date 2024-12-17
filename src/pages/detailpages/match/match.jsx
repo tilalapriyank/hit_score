@@ -7,14 +7,14 @@ import { getMatchDetail } from "../../../api/services/matchdetail";
 const { Title, Text } = Typography;
 
 const Info = lazy(() => import("./tabs/Info"));
-const Live = lazy(() => import("./tabs/Live"));
+const Commentary = lazy(() => import("./tabs/Commentary"));
 const Scorecard = lazy(() => import("./tabs/Scorecard"));
 const Squads = lazy(() => import("./tabs/Squads"));
 const Overs = lazy(() => import("./tabs/Overs"));
 
 const TabComponents = {
   info: Info,
-  live: Live,
+  commentary: Commentary,
   scorecard: Scorecard,
   squads: Squads,
   overs: Overs,
@@ -98,7 +98,7 @@ const Match = () => {
         </Row>
       </Card>
 
-      <Tabs defaultActiveKey="overs">
+      <Tabs defaultActiveKey="commentary">
         {MatchTabs.map((tab) => {
           const Component = TabComponents[tab.key];
           const teamsIds = tab.key === "squads" ? { team1Id: team1.id, team2Id: team2.id } : null;

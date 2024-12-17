@@ -7,7 +7,7 @@ export const TABS = [
 
 export const MatchTabs = [
   { key: "info", label: "Info" },
-  { key: "live", label: "Live" },
+  { key: "commentary", label: "Commentary" },
   { key: "scorecard", label: "Scorecard" },
   { key: "squads", label: "Squads" },
   { key: "overs", label: "Overs"},
