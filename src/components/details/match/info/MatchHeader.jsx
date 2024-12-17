@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Typography, Row, Col } from "antd";
-import { RightCircleOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 

@@ -1,12 +1,11 @@
 import React from "react";
-import { Layout, Typography } from "antd";
+import { Layout  } from "antd";
 import RecentMatches from "./RecentMatches";
 import LiveMatches from "./LiveMatches";
 import NewsSection from "./NewsSection";
 import UpcomingMatches from "./UpcomingMatches";
 
-const { Content, Header } = Layout;
-const { Title } = Typography;
+const { Content } = Layout;
 
 const HomePage = ({ recentMatchData }) => {
   return (

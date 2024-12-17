@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Card, Typography, Spin, Alert } from "antd";
+import { Row, Col, Typography, Spin, Alert } from "antd";
 import { getMatchSquad } from "../../../../api/services/matchsquad";
 import SquadCard from "../../../../components/details/match/squad/SquadCard";
 

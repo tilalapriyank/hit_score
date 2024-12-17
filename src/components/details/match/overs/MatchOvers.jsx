@@ -1,6 +1,5 @@
 import React from "react";
-import { List, Card, Row, Col, Avatar, Tag, Tooltip } from "antd";
-import { FlagOutlined } from "@ant-design/icons"; // Optional icon for milestone tags
+import { List, Card, Row, Col, Avatar,  Tooltip } from "antd";
 
 const MatchOvers = ({ matchOvers }) => {
   if (!matchOvers) return null;

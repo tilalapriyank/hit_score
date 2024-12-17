@@ -19,12 +19,13 @@ const ImageComponent = ({ imageId, width }) => {
         setSrc(noImage);
         // console.error("Error fetching image:", error);
       }
+      setImgWidth(width)
     };
 
     fetchImage();
-  }, [imageId]);
+  }, [imageId,width]);
 
-  return <img src={src} width={imgWidth} alt="Image" />;
+  return <img src={src} width={imgWidth} alt="nofetch" />;
 };
 
 export default ImageComponent;

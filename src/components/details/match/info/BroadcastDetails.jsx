@@ -1,5 +1,7 @@
 import React from "react";
-import { Table, Card } from "antd";
+import { Table, Card ,Typography} from "antd";
+
+const {Text}=Typography;
 
 const BroadcastDetails = ({ matchInfo }) => {
   if (!matchInfo.broadcastInfo) return <Text>No broadcast information available</Text>;
