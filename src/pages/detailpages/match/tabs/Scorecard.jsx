@@ -31,7 +31,7 @@ const Scorecard = ({ matchId }) => {
       {matchScorecard?.map((inning, index) => (
         <Panel
           header={`${inning.batTeamDetails.batTeamName} - ${
-            inning.inningsId === 1 ? "1st Innings" : "2nd Innings"
+            inning.inningsId === 1 || inning.inningsId === 2 ? "1st Innings" : "2nd Innings"
           }`}
           key={index}
         >
