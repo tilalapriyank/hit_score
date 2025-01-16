@@ -64,7 +64,7 @@ const MatchCard = ({ match }) => {
             </Col>
             <Col>
               <Text>{team2Innings1}</Text>
-              {team2Innings2 !== "  " && (
+              {team2Innings2 !== " " && (
                 <Text> &nbsp;&amp;&nbsp;{team2Innings2}</Text>
               )}
             </Col>
