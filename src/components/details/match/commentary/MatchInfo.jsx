@@ -46,10 +46,10 @@ const MatchInfo = ({ matchMini }) => {
   const formattedOvers = battingTeamOvers.toFixed(1);
 
   const team1 = matchScoreDetails.inningsScoreList.find(
-    (team) => team.batTeamId === udrs.team1Id
+    (team) => team.batTeamId === matchUdrs.team1Id
   );
   const team2 = matchScoreDetails.inningsScoreList.find(
-    (team) => team.batTeamId === udrs.team2Id
+    (team) => team.batTeamId === matchUdrs.team2Id
   );
   return (
     <Card

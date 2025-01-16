@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Card, Collapse } from "antd";
+import {  Card, Collapse } from "antd";
 
 const { Panel } = Collapse;
 

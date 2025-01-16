@@ -1,11 +1,11 @@
 import React from "react";
-import { Card, Typography, Divider } from "antd";
+import { Card, Typography  } from "antd";
 import PlayerStats from "./PlayerStats";
 import Partnerships from "./Partnerships";
 import ExtrasAndTotal from "./ExtrasAndTotal";
 import FallOfWickets from "./FallOfWickets";
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const InningDetails = ({ inningData }) => {
   const {

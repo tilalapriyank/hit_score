@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Tabs, Select, Row, Col, Spin } from 'antd';
+import { Tabs, Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import RankingFilters from '../../components/ranking/RankingFilters';
 import RankingTable from '../../components/ranking/RankingsTable';
